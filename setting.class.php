@@ -22,22 +22,22 @@ class setting extends mysqlq {
 	}
 
 
-    public function get_setting($entity, $bool = false) {
+    public function get_setting($setting_name, $bool = false) {
 		if($bool == false)
 		{
-			if(setting::check_setting_exists($entity))
+			if(setting::check_setting_exists($setting_name))
 			{
-				$entity = mysql_escape_string($entity);
-				$result = mysqlq::execute("SELECT `setting_value` FROM `settings` WHERE `setting_name` = '".$entity."'");
+				$setting_name = mysql_escape_string($setting_name);
+				$result = mysqlq::execute("SELECT `setting_value` FROM `settings` WHERE `setting_name` = '".$setting_name."'");
 				return $result['setting_value'];
 			}else{
-				die("<strong>Halted:</strong> Setting $entity does not exist.");
+				die("<strong>Halted:</strong> Setting $setting_name does not exist.");
 			}
 		}elseif($bool = true){
-			if(setting::check_setting_exists($entity))
+			if(setting::check_setting_exists($setting_name))
 			{
-				$entity = mysql_escape_string($entity);
-				$result = mysqlq::execute("SELECT `setting_value` FROM `settings` WHERE `setting_name` = '".$entity."'");
+				$setting_name = mysql_escape_string($setting_name);
+				$result = mysqlq::execute("SELECT `setting_value` FROM `settings` WHERE `setting_name` = '".$setting_name."'");
 				$result = intval($result['setting_value']);
 				if($result == 1)
 				{
@@ -46,7 +46,7 @@ class setting extends mysqlq {
 					return false;	
 				}
 			}else{
-				die("<strong>Halted:</strong> Setting $entity does not exist.");
+				die("<strong>Halted:</strong> Setting $setting_name does not exist.");
 			}	
 		}
 	}	
