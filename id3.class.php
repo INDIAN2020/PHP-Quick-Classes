@@ -2,8 +2,8 @@
 
 class id3 
 {
-	function __construct() {
-		
+	function __construct($file) {
+		$this->getId3($file);
 	}
 	
 	public function getid3 ($file) { 
